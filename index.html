@@ -4,12 +4,463 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Proiect Robotica Calcule</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <title>Seb</title>
 </head>
 <body>
+<!-- ------Title----- -->
 
 
-  <script src="app.js" charset="utf-8"></script>
+<!-- -----Div cu date de intrare si tabel rezultate----- -->
+
+<div class="aplication">
+  <div id="space">
+    <h1>Mână mecanică cu mecanism cu bielă-manivelă</h1>
+  </div>
+  <!-- -----div date de intrare---- -->
+  <div id="datas" class="container">
+    <!-- ----row---- -->
+    <div class="row">
+      <!-- ---first column---- -->
+      <div class="column">
+        <p><strong>Date inițiale</strong></p>
+        <form>
+          <div class="left">
+            <div class="box">
+              <label for="pressure">p [bar] = </label>
+              <input type="number" id="pressure" name="pressure" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="l1">l<span class="small_letter">1</span> [mm] = </label>
+              <input type="number" id="l1" name="l1" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="l2">l<span class="small_letter">2</span> [mm] = </label>
+              <input type="number" id="l2" name="l2" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="l3">l<span class="small_letter">3</span> [mm] = </label>
+              <input type="number" id="l3" name="l3" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="e1">e<span class="small_letter">1</span> [mm] = </label>
+              <input type="number" id="e1" name="e1" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="e2">e<span class="small_letter">1</span> [mm] = </label>
+              <input type="number" id="e2" name="e2" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="alfa0">α<span class="small_letter">0</span>  [ ° ] = </label>
+              <input type="number" id="alfa0" name="alfa0" placeholder="...">
+            </div>
+          </div>
+          <div class="right">
+            <div class="box">
+              <label for="D0">D<span class="small_letter">0</span> [mm] = </label>
+              <input type="number" id="D0" name="D0" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="deltaD">∆D [mm] = </label>
+              <input type="number" id="deltaD" name="deltaD" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="kp">k<span class="small_letter">p</span> [ - ] = </label>
+              <input type="number" id="kp" name="kp" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="miu1">μ<span class="small_letter">1</span> [ - ] = </label>
+              <input type="number" id="miu1" name="miu1" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="miu2">μ<span class="small_letter">2</span>  [ - ] = </label>
+              <input type="number" id="miu2" name="miu2" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="kapa">k  [ - ] = </label>
+              <input type="number" id="kapa" name="kapa" placeholder="...">
+            </div>
+            <div class="box">
+              <label for="randament">η [ - ] = </label>
+              <input type="number" id="randament" name="randament" placeholder="...">
+            </div>
+          </div>
+
+        </form>
+        <div class="button">
+          <button type="button" name="button" id="button"><strong>Calcul</strong></button>
+        </div>
+      </div>
+
+      <div class="diametru_cil">
+        <div class="box">
+          <label for="diametru_cil">D<span class="small_letter">c</span>* [mm] = </label>
+          <input type="number" id="diametru_cil" name="diametru_cil" placeholder="...">
+        </div>
+        <div class="button2">
+          <button type="button" name="button" id="button"><strong>Calcul</strong></button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="rezultate-cilindru container">
+      <!-- ----row---- -->
+      <div class="row">
+        <!-- ---first column---- -->
+        <div class="column_second">
+          <p><strong>Rezultate cilindru</strong></p>
+          <form>
+            <div class="left2">
+              <div class="box">
+                <label for="fnecM">F<span class="small_letter">nec</span>M[N] = <p id="fnecM" class="outputbox">...</p></label>
+              </div>
+              <div class="box">
+                <label for="D_c">D<span class="small_letter">c</span>[mm](10) = <p id="D_c" class="outputbox">...</p></label>
+              </div>
+              <div class="box">
+                <label for="st">s<span class="small_letter">t</span>[mm](14) = <p id="st" class="outputbox">...</p></label>
+              </div>
+            </div>
+            <div class="right2">
+              <div class="box">
+                <label for="amare">A [mm^2] = <p id="amare" class="outputbox">...</p></label>
+              </div>
+              <div class="box">
+                <label for=fef">F<span class="small_letter">ef</span>[N] (11) = <p id="fef" class="outputbox">...</p></label>
+              </div>
+              <div class="box">
+                <label for="qef">Q<span class="small_letter">ef</span>[N] = <p id="qef" class="outputbox">...</p></label>
+              </div>
+            </div>
+          </form>
+
+          </div>
+        </div>
+      </div>
+  <div class="responsive-table">
+
+
+  <table class="demo">
+
+	<thead>
+	<tr class="bigger">
+		<th class="border-calcul">Nr.</th>
+		<th>D [mm]</th>
+		<th>γ[°] (1)</th>
+		<th>Γ(γ) (2)</th>
+		<th>ε[mm] (3)</th>
+		<th>α[°] (4)</th>
+		<th>β[°] (5)</th>
+		<th>h[mm] (6)</th>
+		<th>G[N] (7)</th>
+		<th>Q<span class="small_letter">nec</span>[N] (8)</th>
+		<th>F<span class="small_letter">nec</span>[N] (9)</th>
+		<th class="border-calcul2">s[mm] (13)</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr class="othercolor">
+		<td class="color">1</td>
+		<td id="diametru-1">...</td>
+		<td id="gamma-mic-1">...</td>
+		<td id="gamma-mare-1">...</td>
+		<td id="epsilon-1">...</td>
+		<td id="alpha-1">...</td>
+		<td id="beta-1">...</td>
+		<td id="inaltime-1">...</td>
+		<td id="g-mare-1">...</td>
+		<td id="q-nec-1">...</td>
+		<td id="f-nec-1">...</td>
+		<td id="s-mic-1">...</td>
+	</tr>
+	<tr>
+		<td class="color">2</td>
+		<td id="diametru-2">...</td>
+		<td id="gamma-mic-2">...</td>
+		<td id="gamma-mare-2">...</td>
+		<td id="epsilon-2">...</td>
+		<td id="alpha-2">...</td>
+		<td id="beta-2">...</td>
+		<td id="inaltime-2">...</td>
+		<td id="g-mare-2">...</td>
+		<td id="q-nec-2">...</td>
+		<td id="f-nec-2">...</td>
+		<td id="s-mic-2">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">3</td>
+		<td id="diametru-3">...</td>
+		<td id="gamma-mic-3">...</td>
+		<td id="gamma-mare-3">...</td>
+		<td id="epsilon-3">...</td>
+		<td id="alpha-3">...</td>
+		<td id="beta-3">...</td>
+		<td id="inaltime-3">...</td>
+		<td id="g-mare-3">...</td>
+		<td id="q-nec-3">...</td>
+		<td id="f-nec-3">...</td>
+		<td id="s-mic-3">...</td>
+	</tr>
+	<tr>
+		<td class="color">4</td>
+		<td id="diametru-4">...</td>
+		<td id="gamma-mic-4">...</td>
+		<td id="gamma-mare-4">...</td>
+		<td id="epsilon-4">...</td>
+		<td id="alpha-4">...</td>
+		<td id="beta-4">...</td>
+		<td id="inaltime-4">...</td>
+		<td id="g-mare-4">...</td>
+		<td id="q-nec-4">...</td>
+		<td id="f-nec-4">...</td>
+		<td id="s-mic-4">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">5</td>
+		<td id="diametru-5">...</td>
+		<td id="gamma-mic-5">...</td>
+		<td id="gamma-mare-5">...</td>
+		<td id="epsilon-5">...</td>
+		<td id="alpha-5">...</td>
+		<td id="beta-5">...</td>
+		<td id="inaltime-5">...</td>
+		<td id="g-mare-5">...</td>
+		<td id="q-nec-5">...</td>
+		<td id="f-nec-5">...</td>
+		<td id="s-mic-5">...</td>
+	</tr>
+	<tr>
+		<td class="color">6</td>
+		<td id="diametru-6">...</td>
+		<td id="gamma-mic-6">...</td>
+		<td id="gamma-mare-6">...</td>
+		<td id="epsilon-6">...</td>
+		<td id="alpha-6">...</td>
+		<td id="beta-6">...</td>
+		<td id="inaltime-6">...</td>
+		<td id="g-mare-6">...</td>
+		<td id="q-nec-6">...</td>
+		<td id="f-nec-6">...</td>
+		<td id="s-mic-6">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">7</td>
+		<td id="diametru-7">...</td>
+		<td id="gamma-mic-7">...</td>
+		<td id="gamma-mare-7">...</td>
+		<td id="epsilon-7">...</td>
+		<td id="alpha-7">...</td>
+		<td id="beta-7">...</td>
+		<td id="inaltime-7">...</td>
+		<td id="g-mare-7">...</td>
+		<td id="q-nec-7">...</td>
+		<td id="f-nec-7">...</td>
+		<td id="s-mic-7">...</td>
+	</tr>
+	<tr>
+		<td class="color">8</td>
+		<td id="diametru-8">...</td>
+		<td id="gamma-mic-8">...</td>
+		<td id="gamma-mare-">...</td>
+		<td id="epsilon-">...</td>
+		<td id="alpha-">...</td>
+		<td id="beta-">...</td>
+		<td id="inaltime-">...</td>
+		<td id="g-mare-">...</td>
+		<td id="q-nec-">...</td>
+		<td id="f-nec-">...</td>
+		<td id="s-mic-">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">9</td>
+		<td id="diametru-9">...</td>
+		<td id="gamma-mic-9">...</td>
+		<td id="gamma-mare-9">...</td>
+		<td id="epsilon-9">...</td>
+		<td id="alpha-9">...</td>
+		<td id="beta-9">...</td>
+		<td id="inaltime-9">...</td>
+		<td id="g-mare-9">...</td>
+		<td id="q-nec-9">...</td>
+		<td id="f-nec-9">...</td>
+		<td id="s-mic-9">...</td>
+	</tr>
+	<tr>
+		<td class="color">10</td>
+		<td id="diametru-10">...</td>
+		<td id="gamma-mic-10">...</td>
+		<td id="gamma-mare-10">...</td>
+		<td id="epsilon-10">...</td>
+		<td id="alpha-10">...</td>
+		<td id="beta-10">...</td>
+		<td id="inaltime-10">...</td>
+		<td id="g-mare-10">...</td>
+		<td id="q-nec-10">...</td>
+		<td id="f-nec-10">...</td>
+		<td id="s-mic-10">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">11</td>
+		<td id="diametru-11">...</td>
+		<td id="gamma-mic-11">...</td>
+		<td id="gamma-mare-11">...</td>
+		<td id="epsilon-11">...</td>
+		<td id="alpha-11">...</td>
+		<td id="beta-11">...</td>
+		<td id="inaltime-11">...</td>
+		<td id="g-mare-11">...</td>
+		<td id="q-nec-11">...</td>
+		<td id="f-nec-11">...</td>
+		<td id="s-mic-11">...</td>
+	</tr>
+	<tr>
+		<td class="color">12</td>
+		<td id="diametru-12">...</td>
+		<td id="gamma-mic-12">...</td>
+		<td id="gamma-mare-12">...</td>
+		<td id="epsilon-12">...</td>
+		<td id="alpha-12">...</td>
+		<td id="beta-12">...</td>
+		<td id="inaltime-12">...</td>
+		<td id="g-mare-12">...</td>
+		<td id="q-nec-12">...</td>
+		<td id="f-nec-12">...</td>
+		<td id="s-mic-12">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">13</td>
+		<td id="diametru-13">...</td>
+		<td id="gamma-mic-13">...</td>
+		<td id="gamma-mare-13">...</td>
+		<td id="epsilon-13">...</td>
+		<td id="alpha-13">...</td>
+		<td id="beta-13">...</td>
+		<td id="inaltime-13">...</td>
+		<td id="g-mare-13">...</td>
+		<td id="q-nec-13">...</td>
+		<td id="f-nec-13">...</td>
+		<td id="s-mic-13">...</td>
+	</tr>
+	<tr>
+		<td class="color">14</td>
+		<td id="diametru-14">...</td>
+		<td id="gamma-mic-14">...</td>
+		<td id="gamma-mare-14">...</td>
+		<td id="epsilon-14">...</td>
+		<td id="alpha-14">...</td>
+		<td id="beta-14">...</td>
+		<td id="inaltime-14">...</td>
+		<td id="g-mare-14">...</td>
+		<td id="q-nec-14">...</td>
+		<td id="f-nec-14">...</td>
+		<td id="s-mic-14">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">15</td>
+		<td id="diametru-15">...</td>
+		<td id="gamma-mic-15">...</td>
+		<td id="gamma-mare-15">...</td>
+		<td id="epsilon-15">...</td>
+		<td id="alpha-15">...</td>
+		<td id="beta-15">...</td>
+		<td id="inaltime-15">...</td>
+		<td id="g-mare-15">...</td>
+		<td id="q-nec-15">...</td>
+		<td id="f-nec-15">...</td>
+		<td id="s-mic-15">...</td>
+	</tr>
+	<tr>
+		<td class="color">16</td>
+		<td id="diametru-16">...</td>
+		<td id="gamma-mic-16">...</td>
+		<td id="gamma-mare-16">...</td>
+		<td id="epsilon-16">...</td>
+		<td id="alpha-16">...</td>
+		<td id="beta-16">...</td>
+		<td id="inaltime-16">...</td>
+		<td id="g-mare-16">...</td>
+		<td id="q-nec-16">...</td>
+		<td id="f-nec-16">...</td>
+		<td id="s-mic-16">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">17</td>
+		<td id="diametru-17">...</td>
+		<td id="gamma-mic-17">...</td>
+		<td id="gamma-mare-17">...</td>
+		<td id="epsilon-17">...</td>
+		<td id="alpha-17">...</td>
+		<td id="beta-17">...</td>
+		<td id="inaltime-17">...</td>
+		<td id="g-mare-17">...</td>
+		<td id="q-nec-17">...</td>
+		<td id="f-nec-17">...</td>
+		<td id="s-mic-17">...</td>
+	</tr>
+	<tr>
+		<td class="color">18</td>
+		<td id="diametru-18">...</td>
+		<td id="gamma-mic-18">...</td>
+		<td id="gamma-mare-18">...</td>
+		<td id="epsilon-18">...</td>
+		<td id="alpha-18">...</td>
+		<td id="beta-18">...</td>
+		<td id="inaltime-18">...</td>
+		<td id="g-mare-18">...</td>
+		<td id="q-nec-18">...</td>
+		<td id="f-nec-18">...</td>
+		<td id="s-mic-18">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">19</td>
+		<td id="diametru-19">...</td>
+		<td id="gamma-mic-19">...</td>
+		<td id="gamma-mare-19">...</td>
+		<td id="epsilon-19">...</td>
+		<td id="alpha-19">...</td>
+		<td id="beta-19">...</td>
+		<td id="inaltime-19">...</td>
+		<td id="g-mare-19">...</td>
+		<td id="q-nec-19">...</td>
+		<td id="f-nec-19">...</td>
+		<td id="s-mic-19">...</td>
+	</tr>
+	<tr>
+		<td class="color">20</td>
+		<td id="diametru-20">...</td>
+		<td id="gamma-mic-20">...</td>
+		<td id="gamma-mare-20">...</td>
+		<td id="epsilon-20">...</td>
+		<td id="alpha-20">...</td>
+		<td id="beta-20">...</td>
+		<td id="inaltime-20">...</td>
+		<td id="g-mare-20">...</td>
+		<td id="q-nec-20">...</td>
+		<td id="f-nec-20">...</td>
+		<td id="s-mic-20">...</td>
+	</tr>
+	<tr class="othercolor">
+		<td class="color">21</td>
+		<td id="diametru-21">...</td>
+		<td id="gamma-mic-21">...</td>
+		<td id="gamma-mare-21">...</td>
+		<td id="epsilon-21">...</td>
+		<td id="alpha-21">...</td>
+		<td id="beta-21">...</td>
+		<td id="inaltime-21">...</td>
+		<td id="g-mare-21">...</td>
+		<td id="q-nec-21">...</td>
+		<td id="f-nec-21">...</td>
+		<td id="s-mic-21">...</td>
+	</tr>
+	<tbody>
+</table>
+</div>
+<br>
+<br>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
