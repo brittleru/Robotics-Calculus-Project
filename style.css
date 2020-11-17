@@ -67,7 +67,7 @@ h1{
 
 .column_second{
   border: 2px solid #16a596;
-  width: 380px;
+  width: 580px;
   padding: 20px;
   /* display: block; */
   /* align-items: center; */
@@ -85,7 +85,7 @@ h1{
 
 }
 .outputbox{
-  width:50px;
+  width: 160px;
   height: 30px;
   border: 1px solid  #16a596;
   background-color: #eeeeee;
@@ -95,21 +95,21 @@ h1{
   position: absolute;
   margin-left: 100px;
   margin-top: -25px;
-
+  /* font-weight: bold; */
 }
 .column_second label p{
   text-transform: none;
 }
 .left2{
   float:left;
-  width: 160px;
+  width: 170px;
 
   padding-right: 10px;
   margin-bottom: 20px;
 }
 .right2{
   float: right;
-  width: 160px;
+  width: 270px;
   margin-bottom: 20px;
   border-left: 1.5px solid #16a596;
   padding-left: 10px;
@@ -142,6 +142,19 @@ h1{
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
 }
+#button2 {
+  margin:auto;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 0 50px 0 50px;
+  text-transform: uppercase;
+  color: #16a596;
+  background-color: #393e46;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+}
 .diametru_cil {
   border: 2px solid #16a596;
   height: 95px;
@@ -161,7 +174,7 @@ h1{
 .responsive-table{
   align-items: center;
   justify-content: center;
-  margin-left: 350px;
+  margin-left: 200px;
 
 
 }
