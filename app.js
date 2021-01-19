@@ -27,8 +27,6 @@ const fef = document.getElementById('fef');
 const qef = document.getElementById('qef');
 
 
-
-
 // Conversion functions
 const PI = Math.PI;
 const toDegrees = angle => angle * (180 / PI);
@@ -54,7 +52,7 @@ const SArr = [];
 let pressure; // [bar]
 let length1; // [mm]
 let length2; // [mm]
-let length3; // [mm]
+let length3; // [mm]  /// trb 72
 let e1; // [mm]
 let e2; // [mm]
 let alpha0; // [degree]
@@ -73,6 +71,7 @@ const rho = 7.8 * Math.pow(10, -6); // [kg/mm^3]
 const g = 9.8; // [m/s]
 const miu = 0.3;
 const etaN = 1;
+
 
 
 // Calculus
@@ -101,8 +100,6 @@ function updateValues() {
     let betaChange = PI - XI - gamma;
     this[`beta${index}`] = document.getElementById(`beta-${index + 1}`);
     let betaDOM = this[`beta${index}`];
-    // console.log(betaDOM);
-    // console.log(toDegrees(betaChange));
     betaDOM.innerHTML = toDegrees(betaChange);
 
 
@@ -126,7 +123,7 @@ function updateValues() {
 
     let hChange = (length2 / (2 * length3)) * (Math.sin(alphaChange + betaChange)
                   / Math.cos(alphaChange)) * biggammaChange * etaN;
-    hChange *= 1000;
+    // hChange *= 1000; // nu trb * 1000 si nu mm
     this[`inaltime${index}`] = document.getElementById(`inaltime-${index + 1}`);
     let hDOM = this[`inaltime${index}`];
     hDOM.innerHTML = hChange;
@@ -144,29 +141,34 @@ function updateValues() {
     QnecDOM.innerHTML = QnecChange;
 
 
-    let FnecChange = 1000 * QnecChange / hChange;
+    let FnecChange = QnecChange / hChange;
     this[`f-nec${index}`] = document.getElementById(`f-nec-${index + 1}`);
     let FnecDOM = this[`f-nec${index}`];
     FnecDOM.innerHTML = FnecChange;
 
 
-    let Schange;
+    // let Schange;
     // ????????????????????????????????????????????????????????????????????? //
-    if (i === -deltaDiameter) {
-      Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
-                length2 * (Math.cos(betaChange) - Math.cos(betaChange));
-    }
-    else if (alpha0 < alphaChange) {
-      Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
-                length2 * (Math.cos(betaChange) - Math.cos(betaChange));
-    }
-    else {
-      Schange = length1 * (Math.cos(alphaChange) - Math.cos(alpha0)) +
-                length2 * (Math.cos(betaChange) - Math.cos(betaArr[0]));
-    }
-    this[`s-mic${index}`] = document.getElementById(`s-mic-${index + 1}`);
-    let SDOM = this[`s-mic${index}`];
-    SDOM.innerHTML = Schange;
+
+    // a0 ->index si am este minim (o singura formula) -> prima
+    // Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
+    //           length2 * (Math.cos(beta0) - Math.cos(betaChange));
+    // if (i === -deltaDiameter) {
+    //   Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
+    //             length2 * (Math.cos(betaChange) - Math.cos(betaChange));
+    // }
+    // else if (alpha0 < alphaChange) {
+    //   Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
+    //             length2 * (Math.cos(betaChange) - Math.cos(betaChange));
+    // }
+    // else {
+    //   Schange = length1 * (Math.cos(alphaChange) - Math.cos(alpha0)) +
+    //             length2 * (Math.cos(betaChange) - Math.cos(betaArr[0]));
+    // }
+
+    // this[`s-mic${index}`] = document.getElementById(`s-mic-${index + 1}`);
+    // let SDOM = this[`s-mic${index}`];
+    // SDOM.innerHTML = Schange;
     // ??????????????????????????????????????????????????????????????????? //
 
     diameterArr.push(i);
@@ -179,19 +181,45 @@ function updateValues() {
     GArr.push(G0);
     QNecArr.push(QnecChange);
     FNecArr.push(FnecChange);
-    SArr.push(Schange);
+    // SArr.push(Schange);
 
   }
 
+  for (let i = -deltaDiameter; i <= deltaDiameter; i++) {
+    let index = i + deltaDiameter;
+    let alphaChange = toRadians(alphaArr[index])
+    let betaChange = toRadians(betaArr[index])
+    let min_alpha = toRadians(Math.min(...alphaArr))
+    let min_beta = toRadians(Math.min(...betaArr))
+
+    let Schange = length1 * (Math.cos(min_alpha) - Math.cos(alphaChange)) +
+                  length2 * (Math.cos(min_beta) - Math.cos(betaChange));
+
+    this[`s-mic${index}`] = document.getElementById(`s-mic-${index + 1}`);
+    let SDOM = this[`s-mic${index}`];
+    SDOM.innerHTML = Schange;
+    SArr.push(Schange);
+  }
+  console.log(SArr);
   fnecM.innerHTML = FNecArr[FNecArr.length - 1];
 
+  // Determinarea fortei de strangere (Q) la bacul de apucare
+  let DM = diameterArr[(diameterArr.length - 1)];
+  console.log(`DM = ${DM}`);
+  let GM = g * Kp * PI * Math.pow(DM, 3) * rho / 4
+  console.log(`GM = ${GM}`);
+
+
   // Determinarea diametrului cilindrului motorului de actionare
-  let Qmax = QNecArr[QNecArr.length - 1];
-  let Fmax= FNecArr[FNecArr.length - 1];
+  let Qmax = Math.max(...QNecArr);
+  let Fmax= Math.max(...FNecArr);
+
+  // let Qmax = (k * GM * Math.cos(theta)) / (2 * miu1 * Math.cos())
+
   let diametruCil = Math.sqrt((4 * Fmax) / ( eta * PI * pressure));
   D_c.innerHTML = diametruCil;
 
-  st.innerHTML = SArr[SArr.length - 1];
+  st.innerHTML = Math.max(...SArr)
 
 }
 
@@ -199,35 +227,38 @@ function updateValues() {
 // Valori dupa alegerea cilindrului
 function cilindruValues() {
 
-  let Qmax = QNecArr[QNecArr.length - 1];
-  let Fmax= FNecArr[FNecArr.length - 1];
-  let garnituraH = 1; // ????????????????????
+  let Qmax = Math.max(...QNecArr);
+  let Fmax= Math.max(...FNecArr);
+  let garnituraH = 6;
   let aplhaM = alphaArr[Math.floor(alphaArr.length / 2)];
   let betaM = betaArr[Math.floor(betaArr.length / 2)];
-  let diametruCil_init = diametru_cil.value;
+  let diametruCil_init = Math.ceil(diametru_cil.value);
+  console.log("diamcil",diametruCil_init);
   let Ffetan = PI * diametruCil_init * garnituraH * pressure * miu * Math.pow(10, -1);
-  let Fef = (PI * Math.pow(diametruCil_init, 2)) / 4 * pressure * Math.pow(10, -1) - Ffetan;
-  let Qef = hArr[hArr.length - 1] * Fef; // ??????????????????????????????????????????????????????????????????????????
-  // ????????????????????????????????????????????????????
-  // ????????????????????????????????????????????????????
-  amare.innerHTML = '???';
+  let Fef = ((PI * Math.pow(diametruCil_init, 2)) / 4) * pressure * Math.pow(10, -1) - Ffetan;
+  let Qef = Math.max(...hArr) * Fef;
+  let Area = PI * Math.pow(diametruCil_init, 2) / 4
+
+  amare.innerHTML = Area;
   fef.innerHTML = Fef;
   qef.innerHTML = Qef;
 }
 
+// TODO: s + h + DC + H
 
 
-console.log("D = ", diameterArr);
-console.log('Gamma = ', gammaArr);
-console.log('Beta = ', betaArr);
-console.log('Alfa = ', alphaArr);
-console.log('Gamma mare = ', BIGamma);
-console.log('Epsilon = ', epsilonArr); // semne pe dos
-console.log('H = ', hArr);
-console.log("G = ", GArr);
-console.log("Qnec = ", QNecArr);
-console.log("Fnec = ", FNecArr);
-console.log("s = ", SArr);
+
+// console.log("D = ", diameterArr);
+// console.log('Gamma = ', gammaArr);
+// console.log('Beta = ', betaArr);
+// console.log('Alfa = ', alphaArr);
+// console.log('Gamma mare = ', BIGamma);
+// console.log('Epsilon = ', epsilonArr); // semne pe dos
+// console.log('H = ', hArr);
+// console.log("G = ", GArr);
+// console.log("Qnec = ", QNecArr);
+// console.log("Fnec = ", FNecArr);
+// console.log("s = ", SArr);
 
 
 
@@ -235,17 +266,17 @@ console.log("s = ", SArr);
 
 // console.log(`G0 = ${G0}`);
 
-
+// let DM = diameterArr[diameterArr.length / 2];
 // let GM = g * Kp * PI * Math.pow(DM, 3) * rho / 4
 // console.log(`GM = ${GM}`);
 
 
-let DM = 75;
+// let DM = diameterArr[diameterArr.length - 1];
 // Dimensionarea bacurilor
-let joc = 3 // 2 - 4 [mm]
-let b = DM / (2 * Math.tan(theta)) + 3;
-let a = D0 / (2 * Math.cos(theta)) - e2;
-let gammaE = gammaArr[gammaArr.length - 1] + joc;
+// let joc = 3 // 2 - 4 [mm]
+// let b = DM / (2 * Math.tan(theta)) + 3;
+// let a = D0 / (2 * Math.cos(theta)) - e2;
+// let gammaE = gammaArr[gammaArr.length - 1] + joc;
 // console.log(`b = ${b}`);
 // console.log(`a = ${a}`);
 // console.log(`GammaE = ${gammaE}`);
@@ -280,73 +311,107 @@ let gammaE = gammaArr[gammaArr.length - 1] + joc;
 
 
 
-
-
-
-
-
 // ===== Event Listeners ===== //
 presiune.addEventListener('input', () => {
   pressure = parseFloat(presiune.value);
+  localStorage.setItem("pressure", pressure);
 });
 l1.addEventListener('input', () => {
   length1 = parseFloat(l1.value);
+  localStorage.setItem("length1", length1);
 });
 l2.addEventListener('input', () => {
   length2 = parseFloat(l2.value);
+  localStorage.setItem("length2", length2);
 });
 l3.addEventListener('input', () => {
   length3 = parseFloat(l3.value);
+  localStorage.setItem("length3", length3);
 });
 e1Id.addEventListener('input', () => {
   e1 = parseFloat(e1Id.value);
+  localStorage.setItem("e1", e1);
 });
 e2Id.addEventListener('input', () => {
   e2 = parseFloat(e2Id.value);
+  localStorage.setItem("e2", e2);
 });
 alfa0.addEventListener('input', () => {
   alpha0 = toRadians(parseFloat(alfa0.value));
-  console.log(alpha0);
+  localStorage.setItem('alpha0', alfa0.value);
 });
 D0id.addEventListener('input', () => {
   D0 = parseFloat(D0id.value);
+  localStorage.setItem("D0", D0);
 });
 deltaDiameterId.addEventListener('input', () => {
   deltaDiameter = parseFloat(deltaDiameterId.value);
+  localStorage.setItem("deltaDiameter", deltaDiameter);
 });
 kp.addEventListener('input', () => {
   Kp = parseFloat(kp.value);
+  localStorage.setItem("Kp", Kp);
 });
 miu1Id.addEventListener('input', () => {
   miu1 = parseFloat(miu1Id.value);
+  localStorage.setItem("miu1", parseFloat(miu1));
 });
 miu2Id.addEventListener('input', () => {
   miu2 = parseFloat(miu2Id.value);
+  localStorage.setItem("miu2", miu2);
 });
 kapa.addEventListener('input', () => {
   k = parseFloat(kapa.value);
+  localStorage.setItem("k", k);
 });
 randament.addEventListener('input', () => {
   eta = parseFloat(randament.value);
+  localStorage.setItem("eta", eta);
 });
 diametru_cil.addEventListener('input', () => {
   diametruCil = parseInt(diametru_cil.value);
+  localStorage.setItem("diametruCil", diametruCil);
 });
+
+
+// ===== Local Storage setup ===== //
+presiune.value = localStorage.getItem('pressure');
+l1.value = localStorage.getItem('length1');
+l2.value = localStorage.getItem('length2');
+l3.value = localStorage.getItem('length3');
+e1Id.value = localStorage.getItem('e1');
+e2Id.value = localStorage.getItem('e2');
+alfa0.value = localStorage.getItem('alpha0');
+D0id.value = localStorage.getItem('D0');
+deltaDiameterId.value = localStorage.getItem('deltaDiameter');
+kp.value = localStorage.getItem('Kp');
+miu1Id.value = localStorage.getItem('miu1');
+miu2Id.value = localStorage.getItem('miu2');
+kapa.value = localStorage.getItem('k');
+randament.value = localStorage.getItem('eta');
+diametru_cil.value = localStorage.getItem('diametruCil');
+
+
+// ===== Local storage values for calculus ===== //
+pressure = parseFloat(presiune.value);
+length1 = parseFloat(l1.value);
+length2 = parseFloat(l2.value);
+length3 = parseFloat(l3.value);
+e1 = parseFloat(e1Id.value);
+e2 = parseFloat(e2Id.value);
+alpha0 = toRadians(parseFloat(alfa0.value));
+D0 = parseFloat(D0id.value);
+deltaDiameter = parseFloat(deltaDiameterId.value);
+Kp = parseFloat(kp.value);
+miu1 = parseFloat(miu1Id.value);
+miu2 = parseFloat(miu2Id.value);
+k = parseFloat(kapa.value);
+eta = parseFloat(randament.value);
+diametruCil = parseInt(diametru_cil.value);
+
+
 button.addEventListener('click', updateValues);
 button2.addEventListener('click', cilindruValues);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
