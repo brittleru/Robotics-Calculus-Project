@@ -1,58 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
-
-*{
+* {
   box-sizing: border-box;
-
 }
 
-body{
+body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   width: 100%;
   height: 100vh;
 }
 
-
-
-
-
-h1{
+h1 {
   text-align: center;
-  padding:20px 0px 50px 0px;
-    margin: 0;
-    text-transform: uppercase;
-
+  padding: 20px 0px 50px 0px;
+  margin: 0;
+  text-transform: uppercase;
 }
-.aplication{
+
+.aplication {
   background-color: #232931;
   color: #eeeeee;
   margin: 0;
-
 }
 
-.box{
+.box {
   display: block;
   align-items: center;
   justify-content: center;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
-.right{
+.right {
   float: right;
   width: 150px;
   margin-bottom: 20px;
-
 }
-.left{
-  float:left;
+
+.left {
+  float: left;
   width: 150px;
   border-right: 1.5px solid #16a596;
   padding-right: 10px;
   margin-bottom: 20px;
-
 }
-.column{
+
+.column {
   border: 2px solid #16a596;
   width: 350px;
   padding: 20px;
@@ -62,10 +55,9 @@ h1{
   height: 350px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   margin-left: 200px;
-
 }
 
-.column_second{
+.column_second {
   border: 2px solid #16a596;
   width: 580px;
   padding: 20px;
@@ -81,13 +73,12 @@ h1{
   margin-top: -210px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   float: left;
-
-
 }
-.outputbox{
+
+.outputbox {
   width: 160px;
   height: 30px;
-  border: 1px solid  #16a596;
+  border: 1px solid #16a596;
   background-color: #eeeeee;
   color: black;
   text-align: center;
@@ -97,40 +88,43 @@ h1{
   margin-top: -25px;
   /* font-weight: bold; */
 }
-.column_second label p{
+
+.column_second label p {
   text-transform: none;
 }
-.left2{
-  float:left;
-  width: 170px;
 
+.left2 {
+  float: left;
+  width: 170px;
   padding-right: 10px;
   margin-bottom: 20px;
 }
-.right2{
+
+.right2 {
   float: right;
   width: 270px;
   margin-bottom: 20px;
   border-left: 1.5px solid #16a596;
   padding-left: 10px;
-
 }
-.column p, .column_second p{
+
+.column p, .column_second p {
   text-align: center;
   border: 1.5px solid #16a596;
   text-transform: uppercase;
 }
 
-.box input{
+.box input {
   width: 60px;
   float: right;
 }
-.small_letter{
+
+.small_letter {
   font-size: 10px;
 }
 
 #button {
-  margin:auto;
+  margin: auto;
   display: block;
   align-items: center;
   justify-content: center;
@@ -140,10 +134,10 @@ h1{
   color: #16a596;
   background-color: #393e46;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-
 }
+
 #button2 {
-  margin:auto;
+  margin: auto;
   display: block;
   align-items: center;
   justify-content: center;
@@ -153,241 +147,267 @@ h1{
   color: #16a596;
   background-color: #393e46;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-
 }
+
 .diametru_cil {
   border: 2px solid #16a596;
   height: 95px;
   padding: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   margin-left: 80px;
-
 }
+
 .color {
   background-color: #16a596;
   color: black !important;
-
 }
-.bigger{
+
+.bigger {
   border-top-left-radius: 10px;
 }
-.responsive-table{
+
+.responsive-table {
   align-items: center;
   justify-content: center;
-  margin-left: 200px;
-
-
+  margin-left: 500px;
+  margin-right: 500px;
 }
+
 .demo {
   margin-top: 50px;
-	border-right: 5px solid #16a596;
-	/* border-collapse:collapse; */
+  border-right: 5px solid #16a596;
+  /* border-collapse:collapse; */
   border-top-left-radius: 100px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
   margin-bottom: 20px;
   width: 1200px;
   height: 800px;
   color: black;
-
-
 }
+
 .demo thead tr {
-    background-color: #16a596;
-    color: #eeeeee;
-    text-align: center;
-
+  background-color: #16a596;
+  color: #eeeeee;
+  text-align: center;
 }
 
-	.demo th {
-		/* border:1px solid #C0C0C0; */
-		padding:5px;
-		background-color: #16a596;
-    padding: 12px 15px;
-    text-align: center;
-    height: 40px;
-    color: black;
+.demo th {
+  /* border:1px solid #C0C0C0; */
+  padding: 5px;
+  background-color: #16a596;
+  padding: 12px 15px;
+  text-align: center;
+  height: 40px;
+  color: black;
+}
 
-	}
-	.demo td {
-    padding: 12px 15px;
-    color: #eeeeee;
+.demo td {
+  padding: 12px 15px;
+  color: #eeeeee;
+}
 
-	}
-
-  .demo tbody tr {
-    border-bottom: 1px solid #16a596;
-
+.demo tbody tr {
+  border-bottom: 1px solid #16a596;
 }
 
 .demo tbody tr:nth-of-type(even) {
-    background-color: #393e46;
+  background-color: #393e46;
 }
 
 .demo tbody tr:last-of-type {
-    border-bottom: 2px solid #16a596;
-
+  border-bottom: 2px solid #16a596;
 }
+
 .demo tbody tr.othercolor {
-    font-weight: bold;
-
-background-color: #232931;
+  font-weight: bold;
+  background-color: #232931;
 }
+
 .border-calcul {
   border-top-left-radius: 100px;
 }
 
-@media (max-width: 992px){
-  .column{
+@media (max-width: 992px) {
+  .column {
     margin-left: -30px;
   }
-  .diametru_cil{
+
+  .diametru_cil {
     position: absolute;
     margin-left: 400px;
   }
-  .column_second{
+
+  .column_second {
     margin-left: 370px;
   }
-  .responsive-table{
+
+  .responsive-table {
     margin-left: 70px;
   }
+
   .demo {
     width: 600px;
     height: 600px;
   }
-
 }
-@media (max-width: 768px){
-  #space{
+
+@media (max-width: 768px) {
+  #space {
     font-size: 15px;
   }
-  p{
+
+  p {
     font-size: 14px;
   }
-  label{
+
+  label {
     font-size: 12px;
   }
 
-  .column{
+  .column {
     margin-left: -80px;
     width: 310px;
     height: 325px;
     padding: 10px;
   }
-  .left{
+
+  .left {
     width: 130px;
   }
-  .right{
+
+  .right {
     width: 130px;
   }
-  #button{
+
+  #button {
     padding: 0 100px 0 105px;
   }
-  .diametru_cil{
+
+  .diametru_cil {
     position: absolute;
     margin-left: 250px;
   }
-  .column_second{
+
+  .column_second {
     margin-left: 250px;
     width: 300px;
     padding: 10px;
     height: 150px;
   }
-  .left2{
+
+  .left2 {
     width: 130px;
   }
-  .right2{
+
+  .right2 {
     width: 140px;
   }
-  .outputbox{
+
+  .outputbox {
     margin-left: 80px;
   }
-  .responsive-table{
+
+  .responsive-table {
     margin-left: 20px;
   }
+
   .demo {
     width: 400px;
     height: 100px;
   }
+
   .demo th {
     padding: 12px 12px;
     height: 10px;
     font-size: 12px;
-
   }
+
   .demo td {
     padding: 12px 12px;
     font-size: 12px;
-
   }
 }
-@media (max-width: 576px){
-  h1{
+
+@media (max-width: 576px) {
+  h1 {
     font-size: 10px;
   }
-  p{
+
+  p {
     font-size: 14px;
   }
-  label{
+
+  label {
     font-size: 12px;
   }
 
-  .column{
+  .column {
     margin-left: -80px;
     width: 310px;
     height: 325px;
     padding: 10px;
   }
-  .left{
+
+  .left {
     width: 130px;
   }
-  .right{
+
+  .right {
     width: 130px;
   }
-  #button{
+
+  #button {
     padding: 0 100px 0 105px;
   }
-  .diametru_cil{
+
+  .diametru_cil {
     position: absolute;
     margin-left: 250px;
     padding: 5px 5px 1px 5px;
   }
-  .button2 button{
+
+  .button2 button {
     padding: 0px 25px 0px 25px !important;
   }
-  .column_second{
+
+  .column_second {
     margin-left: 250px;
     width: 300px;
     padding: 10px;
     height: 150px;
   }
-  .left2{
+
+  .left2 {
     width: 130px;
   }
-  .right2{
+
+  .right2 {
     width: 140px;
   }
-  .outputbox{
+
+  .outputbox {
     margin-left: 80px;
   }
-  .responsive-table{
+
+  .responsive-table {
     margin-left: 20px;
   }
+
   .demo {
     width: 400px;
     height: 100px;
   }
+
   .demo th {
     padding: 12px 12px;
     height: 10px;
     font-size: 12px;
-
   }
+
   .demo td {
     padding: 12px 12px;
     font-size: 12px;
-
   }
 }
-@media (max-width: 375px){
 
-}
+@media (max-width: 375px) {}

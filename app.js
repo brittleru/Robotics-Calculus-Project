@@ -86,90 +86,65 @@ function updateValues() {
 
     this[`marker${index}`] = document.getElementById(`diametru-${index + 1}`);
     let diametrulDOM = this[`marker${index}`];
-    diametrulDOM.innerHTML = D0 + i;
+    diametrulDOM.innerHTML = (D0 + i).toFixed(2);
 
 
     let gamma = Math.asin(-e2 / length3 * Math.cos(Math.atan(-i / (2 * length3 *
-                Math.cos(theta)) - e2 / length3))) -
-                Math.atan(-i / (2 * length3 * Math.cos(theta)) - e2 / length3);
+        Math.cos(theta)) - e2 / length3))) -
+      Math.atan(-i / (2 * length3 * Math.cos(theta)) - e2 / length3);
     this[`gamma${index}`] = document.getElementById(`gamma-mic-${index + 1}`);
     let gammaDOM = this[`gamma${index}`];
-    gammaDOM.innerHTML = toDegrees(gamma);
+    gammaDOM.innerHTML = (toDegrees(gamma)).toFixed(4);
 
 
     let betaChange = PI - XI - gamma;
     this[`beta${index}`] = document.getElementById(`beta-${index + 1}`);
     let betaDOM = this[`beta${index}`];
-    betaDOM.innerHTML = toDegrees(betaChange);
+    betaDOM.innerHTML = (toDegrees(betaChange)).toFixed(4);
 
 
     let alphaChange = Math.asin((e2 + length2 * Math.sin(betaChange) - e1) / length1);
     this[`alpha${index}`] = document.getElementById(`alpha-${index + 1}`);
     let alphaDOM = this[`alpha${index}`];
-    alphaDOM.innerHTML = toDegrees(alphaChange);
+    alphaDOM.innerHTML = (toDegrees(alphaChange)).toFixed(4);
 
 
     let biggammaChange = Math.cos(gamma) / (1 + e2 / length3 * Math.sin(gamma));
     this[`bigGamma${index}`] = document.getElementById(`gamma-mare-${index + 1}`);
     let bigGammaDOM = this[`bigGamma${index}`];
-    bigGammaDOM.innerHTML = biggammaChange;
+    bigGammaDOM.innerHTML = (biggammaChange).toFixed(4);
 
 
     let epsilonChange = length3 * (((1 + e2 / length3 * Math.sin(gamma)) / Math.cos(gamma)) - 1);
     this[`epsilon${index}`] = document.getElementById(`epsilon-${index + 1}`);
     let epsilonDOM = this[`epsilon${index}`];
-    epsilonDOM.innerHTML = -epsilonChange;
+    epsilonDOM.innerHTML = (-epsilonChange).toFixed(4);
 
 
-    let hChange = (length2 / (2 * length3)) * (Math.sin(alphaChange + betaChange)
-                  / Math.cos(alphaChange)) * biggammaChange * etaN;
+    let hChange = (length2 / (2 * length3)) * (Math.sin(alphaChange + betaChange) /
+      Math.cos(alphaChange)) * biggammaChange * etaN;
     // hChange *= 1000; // nu trb * 1000 si nu mm
     this[`inaltime${index}`] = document.getElementById(`inaltime-${index + 1}`);
     let hDOM = this[`inaltime${index}`];
-    hDOM.innerHTML = hChange;
+    hDOM.innerHTML = (hChange).toFixed(4);
 
 
     let G0 = g * Kp * PI * Math.pow(D0 + i, 3) * rho / 4;
     this[`g-mare${index}`] = document.getElementById(`g-mare-${index + 1}`);
-    let GDOM= this[`g-mare${index}`];
-    GDOM.innerHTML = G0;
+    let GDOM = this[`g-mare${index}`];
+    GDOM.innerHTML = (G0).toFixed(4);
 
 
     let QnecChange = (k * G0 * Math.cos(theta)) / (2 * miu1 * Math.cos(gamma));
     this[`q-nec${index}`] = document.getElementById(`q-nec-${index + 1}`);
     let QnecDOM = this[`q-nec${index}`];
-    QnecDOM.innerHTML = QnecChange;
+    QnecDOM.innerHTML = (QnecChange).toFixed(4);
 
 
     let FnecChange = QnecChange / hChange;
     this[`f-nec${index}`] = document.getElementById(`f-nec-${index + 1}`);
     let FnecDOM = this[`f-nec${index}`];
-    FnecDOM.innerHTML = FnecChange;
-
-
-    // let Schange;
-    // ????????????????????????????????????????????????????????????????????? //
-
-    // a0 ->index si am este minim (o singura formula) -> prima
-    // Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
-    //           length2 * (Math.cos(beta0) - Math.cos(betaChange));
-    // if (i === -deltaDiameter) {
-    //   Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
-    //             length2 * (Math.cos(betaChange) - Math.cos(betaChange));
-    // }
-    // else if (alpha0 < alphaChange) {
-    //   Schange = length1 * (Math.cos(alpha0) - Math.cos(alphaChange)) +
-    //             length2 * (Math.cos(betaChange) - Math.cos(betaChange));
-    // }
-    // else {
-    //   Schange = length1 * (Math.cos(alphaChange) - Math.cos(alpha0)) +
-    //             length2 * (Math.cos(betaChange) - Math.cos(betaArr[0]));
-    // }
-
-    // this[`s-mic${index}`] = document.getElementById(`s-mic-${index + 1}`);
-    // let SDOM = this[`s-mic${index}`];
-    // SDOM.innerHTML = Schange;
-    // ??????????????????????????????????????????????????????????????????? //
+    FnecDOM.innerHTML = (FnecChange).toFixed(4);
 
     diameterArr.push(i);
     gammaArr.push(toDegrees(gamma));
@@ -181,7 +156,6 @@ function updateValues() {
     GArr.push(G0);
     QNecArr.push(QnecChange);
     FNecArr.push(FnecChange);
-    // SArr.push(Schange);
 
   }
 
@@ -193,15 +167,15 @@ function updateValues() {
     let min_beta = toRadians(Math.min(...betaArr))
 
     let Schange = length1 * (Math.cos(min_alpha) - Math.cos(alphaChange)) +
-                  length2 * (Math.cos(min_beta) - Math.cos(betaChange));
+      length2 * (Math.cos(min_beta) - Math.cos(betaChange));
 
     this[`s-mic${index}`] = document.getElementById(`s-mic-${index + 1}`);
     let SDOM = this[`s-mic${index}`];
-    SDOM.innerHTML = Schange;
+    SDOM.innerHTML = (Schange).toFixed(4);
     SArr.push(Schange);
   }
   console.log(SArr);
-  fnecM.innerHTML = FNecArr[FNecArr.length - 1];
+  fnecM.innerHTML = (FNecArr[FNecArr.length - 1]).toFixed(4);
 
   // Determinarea fortei de strangere (Q) la bacul de apucare
   let DM = diameterArr[(diameterArr.length - 1)];
@@ -212,14 +186,12 @@ function updateValues() {
 
   // Determinarea diametrului cilindrului motorului de actionare
   let Qmax = Math.max(...QNecArr);
-  let Fmax= Math.max(...FNecArr);
+  let Fmax = Math.max(...FNecArr);
 
-  // let Qmax = (k * GM * Math.cos(theta)) / (2 * miu1 * Math.cos())
+  let diametruCil = Math.sqrt((4 * Fmax) / (eta * PI * pressure));
+  D_c.innerHTML = (diametruCil).toFixed(4);
 
-  let diametruCil = Math.sqrt((4 * Fmax) / ( eta * PI * pressure));
-  D_c.innerHTML = diametruCil;
-
-  st.innerHTML = Math.max(...SArr)
+  st.innerHTML = (Math.max(...SArr)).toFixed(4);
 
 }
 
@@ -228,86 +200,21 @@ function updateValues() {
 function cilindruValues() {
 
   let Qmax = Math.max(...QNecArr);
-  let Fmax= Math.max(...FNecArr);
+  let Fmax = Math.max(...FNecArr);
   let garnituraH = 6;
   let aplhaM = alphaArr[Math.floor(alphaArr.length / 2)];
   let betaM = betaArr[Math.floor(betaArr.length / 2)];
   let diametruCil_init = Math.ceil(diametru_cil.value);
-  console.log("diamcil",diametruCil_init);
+  console.log("diamcil", diametruCil_init);
   let Ffetan = PI * diametruCil_init * garnituraH * pressure * miu * Math.pow(10, -1);
   let Fef = ((PI * Math.pow(diametruCil_init, 2)) / 4) * pressure * Math.pow(10, -1) - Ffetan;
   let Qef = Math.max(...hArr) * Fef;
   let Area = PI * Math.pow(diametruCil_init, 2) / 4
 
-  amare.innerHTML = Area;
-  fef.innerHTML = Fef;
-  qef.innerHTML = Qef;
+  amare.innerHTML = (Area).toFixed(4);
+  fef.innerHTML = (Fef).toFixed(4);
+  qef.innerHTML = (Qef).toFixed(4);
 }
-
-// TODO: s + h + DC + H
-
-
-
-// console.log("D = ", diameterArr);
-// console.log('Gamma = ', gammaArr);
-// console.log('Beta = ', betaArr);
-// console.log('Alfa = ', alphaArr);
-// console.log('Gamma mare = ', BIGamma);
-// console.log('Epsilon = ', epsilonArr); // semne pe dos
-// console.log('H = ', hArr);
-// console.log("G = ", GArr);
-// console.log("Qnec = ", QNecArr);
-// console.log("Fnec = ", FNecArr);
-// console.log("s = ", SArr);
-
-
-
-// let G0 = g * Kp * PI * Math.pow(D0, 3) * rho / 4;
-
-// console.log(`G0 = ${G0}`);
-
-// let DM = diameterArr[diameterArr.length / 2];
-// let GM = g * Kp * PI * Math.pow(DM, 3) * rho / 4
-// console.log(`GM = ${GM}`);
-
-
-// let DM = diameterArr[diameterArr.length - 1];
-// Dimensionarea bacurilor
-// let joc = 3 // 2 - 4 [mm]
-// let b = DM / (2 * Math.tan(theta)) + 3;
-// let a = D0 / (2 * Math.cos(theta)) - e2;
-// let gammaE = gammaArr[gammaArr.length - 1] + joc;
-// console.log(`b = ${b}`);
-// console.log(`a = ${a}`);
-// console.log(`GammaE = ${gammaE}`);
-
-
-
-
-
-
-// console.log('qmax = ', Qmax);
-// console.log('fmax = ', Fmax);
-// console.log('Diametru cilindru = ', diametruCil);
-// console.log('Se alege diametrul cilindrului: 20mm si latimea garniturii H: ???');
-
-
-
-// // Determinarea cursei pistonuliui motorului de actionare
-// // -- Cursa pistonului pentru diametrul minim -- //
-// let sprim = length1 * (Math.cos(toRadians(alpha0)) - Math.cos(toRadians(alphaArr[0]))) +
-//             length2 * (Math.cos(toRadians(beta0)) - Math.cos(toRadians(betaArr[0])));
-// let sprimR = sprim + 3;
-//
-// // -- Cursa pistonului pentru diametrul maxim -- //
-// let sSecund = length1 * (Math.cos(toRadians(alphaArr[alphaArr.length - 1])) - Math.cos(toRadians(alpha0))) +
-//               length2 * (Math.cos(toRadians(betaArr[betaArr.length - 1])) - Math.cos(toRadians(beta0)));
-
-// console.log("S prim = ", sprim);
-// console.log('S prim R = ', sprimR);
-// console.log('S secund = ', sSecund);
-// console.log("Fef =", Fef);
-// console.log('Qef =', Qef); // ?????????????????????????????????????????
 
 
 
@@ -412,12 +319,6 @@ diametruCil = parseInt(diametru_cil.value);
 
 button.addEventListener('click', updateValues);
 button2.addEventListener('click', cilindruValues);
-
-
-
-
-
-
 
 
 
